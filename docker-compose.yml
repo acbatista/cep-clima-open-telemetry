@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  service-a:
+    build:
+      context: ./service-a
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - OTEL_COLLECTOR_URL=otel-collector:4317
+      - SERVICE_B_URL=http://service-b:8081
+      - WEATHER_API_KEY=${WEATHER_API_KEY}
+    depends_on:
+      - service-b
+      - otel-collector
+    networks:
+      - app-network
+
+  service-b:
+    build:
+      context: ./service-b
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    environment:
+      - OTEL_COLLECTOR_URL=otel-collector:4317
+      - WEATHER_API_KEY=${WEATHER_API_KEY}
+    networks:
+      - app-network
+
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:latest
+    command: ["--config=/etc/otel-collector-config.yaml"]
+    volumes:
+      - ./otel-collector-config.yaml:/etc/otel-collector-config.yaml
+    ports:
+      - "4317:4317"   # OTLP gRPC receiver
+      - "4318:4318"   # OTLP http receiver
+      - "8889:8889"   # Prometheus exporter
+      - "13133:13133" # health check extension
+    networks:
+      - app-network
+    depends_on:
+      - zipkin
+
+  zipkin:
+    image: openzipkin/zipkin:latest
+    ports:
+      - "9411:9411"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

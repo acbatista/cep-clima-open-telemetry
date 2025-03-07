@@ -1,0 +1,51 @@
+### Variáveis globais
+@serviceA = http://localhost:8080
+@serviceB = http://localhost:8081
+
+### Teste do Serviço A - CEP válido
+POST {{serviceA}}/zipcode
+Content-Type: application/json
+
+{
+  "cep": "66777"
+}
+
+### Teste do Serviço A - CEP inválido (formato incorreto)
+POST {{serviceA}}/zipcode
+Content-Type: application/json
+
+{
+  "cep": "123"
+}
+
+### Teste do Serviço A - CEP inválido (não numérico)
+POST {{serviceA}}/zipcode
+Content-Type: application/json
+
+{
+  "cep": "abcdefgh"
+}
+
+### Teste direto do Serviço B - CEP válido
+POST {{serviceB}}/weather
+Content-Type: application/json
+
+{
+  "cep": "01001000"
+}
+
+### Teste direto do Serviço B - CEP inexistente
+POST {{serviceB}}/weather
+Content-Type: application/json
+
+{
+  "cep": "99999999"
+}
+
+### Teste direto do Serviço B - CEP inválido
+POST {{serviceB}}/weather
+Content-Type: application/json
+
+{
+  "cep": "123456"
+}

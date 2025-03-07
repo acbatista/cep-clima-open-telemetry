@@ -1,0 +1,61 @@
+# Binários compilados
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+bin/
+dist/
+
+# Arquivos de teste
+*.test
+*.out
+coverage.txt
+
+# Arquivos de dependência
+vendor/
+
+# Arquivos de IDE e editores
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Arquivos de ambiente
+.env
+.env.local
+.env.*.local
+
+# Arquivos de log
+*.log
+
+# Arquivos temporários do sistema
+.DS_Store
+Thumbs.db
+
+# Arquivos específicos do Go
+go.work
+
+# Arquivos de debug
+debug/
+__debug_bin
+
+# Diretório de build
+build/
+
+# Arquivos temporários
+tmp/
+temp/
+
+# Certificados e chaves
+*.pem
+*.key
+*.crt
+
+# Arquivos de configuração local
+config.local.yaml
+config.dev.yaml
+
+# Diretório de cache do Go
+go.sum.bak
