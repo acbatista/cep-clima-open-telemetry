@@ -24,8 +24,8 @@ Este projeto consiste em dois serviços desenvolvidos em Go:
 
 1. Clone o repositório:
    ```bash
-   git clone <url-do-repositorio>
-   cd <nome-do-repositorio>
+   git clone github.com/acbatista/cep-clima-open-telemetry
+   cd cep-clima-open-telemetry
    ```
 
 2. Crie um arquivo `.env` na raiz do projeto para armazenar sua chave de API:
@@ -61,6 +61,11 @@ A resposta deve ser algo como:
   "temp_K": 301.65
 }
 ```
+## Evidência
+
+
+![Execução](docs/envidencia-teste.png)
+
 
 ## Estrutura do projeto
 
