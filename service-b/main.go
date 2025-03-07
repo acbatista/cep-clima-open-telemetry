@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	url2 "net/url"
 	"os"
 	"regexp"
 
@@ -221,7 +222,7 @@ func fetchTemperature(ctx context.Context, city string) (float64, error) {
 		Transport: otelhttp.NewTransport(http.DefaultTransport),
 	}
 
-	url := fmt.Sprintf("https://api.weatherapi.com/v1/current.json?key=%s&q=%s&aqi=no", apiKey, city)
+	url := fmt.Sprintf("https://api.weatherapi.com/v1/current.json?key=%s&q=%s&aqi=no", apiKey, url2.QueryEscape(city))
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, url, nil)
 	if err != nil {
 		return 0, err
